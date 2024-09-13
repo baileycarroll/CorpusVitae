@@ -59,9 +59,9 @@ void main() {
   testWidgets('Testing for the Home Page', (WidgetTester tester) async {
     await tester.pumpWidget(const App());
     expect(find.byIcon(Icons.add), findsNWidgets(3));
-    expect(find.text('Add Workout'), findsOneWidget);
-    expect(find.text('Add Meal'), findsOneWidget);
-    expect(find.text('Add Goal'), findsOneWidget);
+    expect(find.text('Workout'), findsOneWidget);
+    expect(find.text('Meal'), findsOneWidget);
+    expect(find.text('Goal'), findsOneWidget);
     expect(find.text('View Most Recent Workout'), findsOneWidget);
     expect(find.text('View Most Recent Meal'), findsOneWidget);
     expect(find.byIcon(Icons.remove_red_eye), findsNWidgets(2));
@@ -72,7 +72,6 @@ void main() {
     await tester.tap(find.byIcon(Icons.fitness_center));
     await tester.pump();
     expect(find.byIcon(Icons.add), findsOneWidget);
-    expect(find.text('Add Workout'), findsOneWidget);
   });
   // Test for the Nutrition Log Page
   testWidgets('Testing for the Nutrition Log Page', (WidgetTester tester) async {

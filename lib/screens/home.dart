@@ -19,6 +19,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 24),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Card(
                         shadowColor: CupertinoTheme.of(context).primaryColor,
@@ -31,16 +33,17 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                Text('Add Workout', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor)),
+                                Icon(Icons.add, color: CupertinoTheme.of(context).primaryContrastingColor)
                               ]
                             ),
+                            
                             const SizedBox(width: 8),
                             Column(
                               children: [
-                                Icon(Icons.add, color: CupertinoTheme.of(context).primaryContrastingColor)
+                                Text('Workout', style: TextStyle(
+                                  color: CupertinoTheme.of(context).primaryContrastingColor)),
                               ]
-                            )
+                            ),
                           ]
                         ),
                         onPressed: () {},
@@ -57,18 +60,18 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Column(
                                     children: [
-                                      Text('Add Meal',
-                                          style: TextStyle(
-                                              color: CupertinoTheme.of(context).primaryContrastingColor)),
+                                      Icon(Icons.add,
+                                      color: CupertinoTheme.of(context).primaryContrastingColor)
                                     ]
                                 ),
                                 const SizedBox(width: 8),
                                 Column(
                                     children: [
-                                      Icon(Icons.add,
-                                      color: CupertinoTheme.of(context).primaryContrastingColor)
+                                      Text('Meal',
+                                          style: TextStyle(
+                                              color: CupertinoTheme.of(context).primaryContrastingColor)),
                                     ]
-                                )
+                                ),
                               ]
                           ),
                           onPressed: () {},
@@ -85,17 +88,17 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Column(
                                     children: [
-                                      Text('Add Goal', style: TextStyle(
-                                        color: CupertinoTheme.of(context).primaryContrastingColor)),
+                                      Icon(Icons.add, color:
+                                        CupertinoTheme.of(context).primaryContrastingColor,)
                                     ]
                                 ),
                                 const SizedBox(width: 8),
                                 Column(
                                     children: [
-                                      Icon(Icons.add, color:
-                                        CupertinoTheme.of(context).primaryContrastingColor,)
+                                      Text('Goal', style: TextStyle(
+                                        color: CupertinoTheme.of(context).primaryContrastingColor)),
                                     ]
-                                )
+                                ),
                               ]
                           ),
                           onPressed: () {},

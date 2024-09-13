@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home.dart';
-// import 'screens/workouts.dart';
+import 'screens/workouts.dart';
 // import 'screens/nutrition.dart';
 // import 'screens/goals.dart';
 // import 'screens/profile.dart';
@@ -91,10 +91,10 @@ class App extends StatelessWidget {
         ]),
         tabBuilder: (context, index) {
           switch (index) {
-            // case 0:
-            //   return HomeScreen();
-            // case 1:
-            //   return WorkoutLogScreen();
+             case 0:
+               return const HomeScreen();
+            case 1:
+               return WorkoutScreen();
             // case 2:
             //   return NutritionLogScreen();
             // case 3:
