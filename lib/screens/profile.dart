@@ -31,26 +31,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       SizedBox(height: 24),
                       Center(
-                        child: SizedBox(
-                          width: 96,
-                          height: 96,
-                          child: Card(
-                            shadowColor: CupertinoTheme.of(context).primaryColor,
-                            elevation: 10.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(70.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.account_circle, color: CupertinoTheme.of(context).primaryContrastingColor, size: 64),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: Icon(Icons.account_circle_sharp, color: CupertinoTheme.of(context).primaryContrastingColor, size: 96),
                       ),
                       SizedBox(height: 24),
                       Card(
