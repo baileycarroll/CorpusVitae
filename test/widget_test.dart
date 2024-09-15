@@ -72,6 +72,8 @@ void main() {
     await tester.tap(find.byIcon(Icons.fitness_center));
     await tester.pump();
     expect(find.byIcon(Icons.add), findsOneWidget);
+    expect(find.byIcon(Icons.remove_red_eye), findsOneWidget);
+    expect(find.text('View All Workouts'), findsOneWidget);
   });
   // Test for the Nutrition Log Page
   testWidgets('Testing for the Nutrition Log Page', (WidgetTester tester) async {
@@ -79,7 +81,8 @@ void main() {
     await tester.tap(find.byIcon(Icons.fastfood));
     await tester.pump();
     expect(find.byIcon(Icons.add), findsOneWidget);
-    expect(find.text('Add Meal'), findsOneWidget);
+    expect(find.byIcon(Icons.remove_red_eye), findsOneWidget);
+    expect(find.text('View All Meals'), findsOneWidget);
   });
   // Test for the Goals Page
   testWidgets('Testing for the Goals Page', (WidgetTester tester) async {
@@ -87,7 +90,8 @@ void main() {
     await tester.tap(find.byIcon(Icons.flag_circle));
     await tester.pump();
     expect(find.byIcon(Icons.add), findsOneWidget);
-    expect(find.text('Add Goal'), findsOneWidget);
+    expect(find.byIcon(Icons.remove_red_eye), findsOneWidget);
+    expect(find.text('View All Goals'), findsOneWidget);
   });
   // Test for the Profile Page
   testWidgets('Testing for the Profile Page', (WidgetTester tester) async {
