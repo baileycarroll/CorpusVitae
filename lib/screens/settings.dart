@@ -16,7 +16,43 @@ class SettingsScreenState extends State<SettingsScreen> {
         middle: Text('Settings'),
       ),
       child: SafeArea(
-        child: Text('Settings Screen'),
+        // this should be a list of settings each in their own card with a switch to toggle them
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Card(
+                margin: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                shadowColor: CupertinoTheme.of(context).primaryColor,
+                elevation: 10.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: ListTile(
+                  title: Text('Dark Mode'),
+                  trailing: CupertinoSwitch(
+                    value: true,
+                    onChanged: (bool value) {},
+                  ),
+                ),
+              ),
+              Card(
+                margin: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                shadowColor: CupertinoTheme.of(context).primaryColor,
+                elevation: 10.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: ListTile(
+                  title: Text('Comprehensive BMI'),
+                  trailing: CupertinoSwitch(
+                    value: true,
+                    onChanged: (bool value) {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
