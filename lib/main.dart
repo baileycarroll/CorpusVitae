@@ -5,8 +5,8 @@ import 'screens/home.dart';
 import 'screens/workouts.dart';
 import 'screens/nutrition.dart';
 import 'screens/goals.dart';
-// import 'screens/profile.dart';
-// import 'screens/settings.dart';
+import 'screens/profile.dart';
+import 'screens/settings.dart';
 
 
 void main() {
@@ -99,11 +99,10 @@ class App extends StatelessWidget {
               return NutritionScreen();
             case 3:
               return GoalsScreen();
-
-            // case 4:
-            //   return ProfileScreen();
-            // case 5:
-            //   return SettingsScreen();
+            case 4:
+              return ProfileScreen();
+            case 5:
+              return SettingsScreen();
             default:
               return const HomeScreen();
           }
