@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'screens/home.dart';
 import 'screens/workouts.dart';
-// import 'screens/nutrition.dart';
+import 'screens/nutrition.dart';
 // import 'screens/goals.dart';
 // import 'screens/profile.dart';
 // import 'screens/settings.dart';
@@ -95,8 +95,8 @@ class App extends StatelessWidget {
                return const HomeScreen();
             case 1:
                return const WorkoutScreen();
-            // case 2:
-            //   return NutritionLogScreen();
+            case 2:
+              return NutritionScreen();
             // case 3:
             //   return GoalsScreen();
             // case 4:
