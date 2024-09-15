@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:corpus_vitae/utils/preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -11,6 +12,25 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
+  bool _comprehensiveBMIToggle = sharedPrefs.comprehensiveBMI;
+  @override
+  void initState() {
+    super.initState();
+    sharedPrefs.addListener(_updateComprehensiveBMI);
+  }
+
+  @override
+  void dispose() {
+    sharedPrefs.removeListener(_updateComprehensiveBMI);
+    super.dispose();
+  }
+
+  void _updateComprehensiveBMI() {
+    setState(() {
+      _comprehensiveBMIToggle = sharedPrefs.comprehensiveBMI;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -123,28 +143,37 @@ class ProfileScreenState extends State<ProfileScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('BMI: ${Random().nextInt(40) + 18}',
-                                    style: TextStyle(
-                                      color: CupertinoTheme.of(context)
-                                          .primaryContrastingColor,
-                                      fontSize: 24,
-                                    )),
-                                const SizedBox(width: 16),
-                                Text('BMR: ${Random().nextInt(40) + 18}',
-                                    style: TextStyle(
-                                      color: CupertinoTheme.of(context)
-                                          .primaryContrastingColor,
-                                      fontSize: 24,
-                                    )),
-                                const SizedBox(width: 16),
-                                Text('TDEE: ${Random().nextInt(40) + 18}',
-                                    style: TextStyle(
-                                      color: CupertinoTheme.of(context)
-                                          .primaryContrastingColor,
-                                      fontSize: 24,
-                                    )),
-                              ],
+                              children: _comprehensiveBMIToggle
+                                  ? [
+                                      Text('BMI: ${Random().nextInt(40) + 18}',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                      const SizedBox(width: 16),
+                                      Text('BMR: ${Random().nextInt(40) + 18}',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                      const SizedBox(width: 16),
+                                      Text('TDEE: ${Random().nextInt(40) + 18}',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                    ]
+                                  : [
+                                      Text('BMI: ${Random().nextInt(40) + 18}',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                    ],
                             ),
                           ),
                         ),

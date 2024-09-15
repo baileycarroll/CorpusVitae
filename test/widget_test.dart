@@ -33,13 +33,21 @@
 *   b. Test for the Comprehensive BMI Toggle
 */
 
+import 'package:corpus_vitae/screens/profile.dart';
+import 'package:corpus_vitae/screens/settings.dart';
+import 'package:corpus_vitae/utils/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:corpus_vitae/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
+  // Shared Preferences
+  SharedPreferences.setMockInitialValues(
+      {'theme': false, 'comprehensiveBMI': false});
+  await sharedPrefs.init();
   // Test for the App Bar
   testWidgets('Testing for the App Bar', (WidgetTester tester) async {
     await tester.pumpWidget(const App());
@@ -102,8 +110,6 @@ void main() {
     expect(find.text('John Doe'), findsOneWidget);
     expect(find.text('johnd@example.com'), findsOneWidget);
     expect(find.textContaining('BMI'), findsOneWidget);
-    expect(find.textContaining('BMR'), findsOneWidget);
-    expect(find.textContaining('TDEE'), findsOneWidget);
     expect(find.text('Edit Profile'), findsOneWidget);
   });
   // Test for the Settings Page
@@ -114,5 +120,53 @@ void main() {
     expect(find.byType(CupertinoSwitch), findsNWidgets(2));
     expect(find.text('Dark Mode'), findsOneWidget);
     expect(find.text('Comprehensive BMI'), findsOneWidget);
+  });
+  // Testing Settings Toggles
+  testWidgets('Testing Dark Mode Toggle', (WidgetTester tester) async {
+    await tester.pumpWidget(const CupertinoApp(home: SettingsScreen()));
+
+    // Verify initial state
+    expect(find.byType(CupertinoSwitch), findsNWidgets(2));
+    expect(find.text('Dark Mode'), findsOneWidget);
+    expect(find.text('Comprehensive BMI'), findsOneWidget);
+
+    // Toggle Dark Mode
+    await tester.tap(find.byType(CupertinoSwitch).first);
+    await tester.pump();
+
+    // Verify the change
+    expect(sharedPrefs.theme, true);
+
+    // Verify the theme change
+    await tester.pumpWidget(CupertinoApp(
+      theme: CupertinoThemeData(
+        brightness: sharedPrefs.theme ? Brightness.dark : Brightness.light,
+      ),
+      home: const ProfileScreen(),
+    ));
+    final BuildContext context = tester.element(find.byType(ProfileScreen));
+    expect(CupertinoTheme.of(context).brightness, Brightness.dark);
+  });
+
+  // Test for the Comprehensive BMI Toggle
+  testWidgets('Testing Comprehensive BMI Toggle', (WidgetTester tester) async {
+    await tester.pumpWidget(const CupertinoApp(home: SettingsScreen()));
+
+    // Verify initial state
+    expect(find.byType(CupertinoSwitch), findsNWidgets(2));
+    expect(find.text('Dark Mode'), findsOneWidget);
+    expect(find.text('Comprehensive BMI'), findsOneWidget);
+
+    // Toggle Comprehensive BMI
+    await tester.tap(find.byType(CupertinoSwitch).last);
+    await tester.pump();
+
+    // Verify the change
+    expect(sharedPrefs.comprehensiveBMI, true);
+
+    // Verify the BMI values change
+    await tester.pumpWidget(const CupertinoApp(home: ProfileScreen()));
+    expect(find.textContaining('BMR'), findsOneWidget);
+    expect(find.textContaining('TDEE'), findsOneWidget);
   });
 }

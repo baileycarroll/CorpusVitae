@@ -1,3 +1,4 @@
+import 'package:corpus_vitae/utils/preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
+  bool _theme = sharedPrefs.theme;
+  bool _comprehensiveBMI = sharedPrefs.comprehensiveBMI;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -31,8 +35,13 @@ class SettingsScreenState extends State<SettingsScreen> {
                 child: ListTile(
                   title: const Text('Dark Mode'),
                   trailing: CupertinoSwitch(
-                    value: true,
-                    onChanged: (bool value) {},
+                    value: _theme,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _theme = value;
+                        sharedPrefs.theme = value;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -47,8 +56,13 @@ class SettingsScreenState extends State<SettingsScreen> {
                 child: ListTile(
                   title: const Text('Comprehensive BMI'),
                   trailing: CupertinoSwitch(
-                    value: true,
-                    onChanged: (bool value) {},
+                    value: _comprehensiveBMI,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _comprehensiveBMI = value;
+                        sharedPrefs.comprehensiveBMI = value;
+                      });
+                    },
                   ),
                 ),
               ),

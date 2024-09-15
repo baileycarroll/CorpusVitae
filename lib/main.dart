@@ -15,23 +15,55 @@ Future<void> main() async {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  AppState createState() => AppState();
+}
+
+class AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+    sharedPrefs.addListener(_updateTheme);
+  }
+
+  @override
+  void dispose() {
+    sharedPrefs.removeListener(_updateTheme);
+    super.dispose();
+  }
+
+  void _updateTheme() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: const CupertinoThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Color(0xFF22D3EE),
-        primaryContrastingColor: Color(0xFFFFFFFF),
+      theme: CupertinoThemeData(
+        brightness: SharedPrefs().theme ? Brightness.dark : Brightness.light,
+        primaryColor: SharedPrefs().theme
+            ? const Color(0xFF22D3EE)
+            : const Color(0xFF6200EE),
+        primaryContrastingColor: SharedPrefs().theme
+            ? const Color(0xFFFFFFFF)
+            : const Color(0xFF000000),
         textTheme: CupertinoTextThemeData(
           textStyle: TextStyle(
-            color: Color(0xFFFFFFFF),
+            color: SharedPrefs().theme
+                ? const Color(0xFFFFFFFF)
+                : const Color(0xFF000000),
             fontSize: 16.0,
           ),
         ),
-        barBackgroundColor: Color(0xFF000000),
-        scaffoldBackgroundColor: Color(0xFF000000),
+        barBackgroundColor: SharedPrefs().theme
+            ? const Color(0xFF000000)
+            : const Color(0xFFFFFFFF),
+        scaffoldBackgroundColor: SharedPrefs().theme
+            ? const Color(0xFF121212)
+            : const Color(0xFFF5F5F5),
         applyThemeToAll: true,
       ),
       home: CupertinoTabScaffold(
