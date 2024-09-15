@@ -76,7 +76,8 @@ void main() {
     expect(find.text('View All Workouts'), findsOneWidget);
   });
   // Test for the Nutrition Log Page
-  testWidgets('Testing for the Nutrition Log Page', (WidgetTester tester) async {
+  testWidgets('Testing for the Nutrition Log Page',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const App());
     await tester.tap(find.byIcon(Icons.fastfood));
     await tester.pump();

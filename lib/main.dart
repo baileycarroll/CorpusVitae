@@ -8,7 +8,6 @@ import 'screens/goals.dart';
 import 'screens/profile.dart';
 import 'screens/settings.dart';
 
-
 void main() {
   runApp(const App());
 }
@@ -36,73 +35,73 @@ class App extends StatelessWidget {
         tabBar: CupertinoTabBar(items: const [
           BottomNavigationBarItem(
               icon: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 1.0)),
-                  Icon(CupertinoIcons.home),
-                  Text('Home')
-                ],
-              )),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 1.0)),
+              Icon(CupertinoIcons.home),
+              Text('Home')
+            ],
+          )),
           BottomNavigationBarItem(
               icon: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 1.0)),
-                  Icon(Icons.fitness_center),
-                  Text('Workouts')
-                ],
-              )),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 1.0)),
+              Icon(Icons.fitness_center),
+              Text('Workouts')
+            ],
+          )),
           BottomNavigationBarItem(
               icon: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 1.0)),
-                  Icon(Icons.fastfood),
-                  Text('Nutrition')
-                ],
-              )),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 1.0)),
+              Icon(Icons.fastfood),
+              Text('Nutrition')
+            ],
+          )),
           BottomNavigationBarItem(
               icon: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 1.0)),
-                  Icon(Icons.flag_circle),
-                  Text('Goals')
-                ],
-              )),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 1.0)),
+              Icon(Icons.flag_circle),
+              Text('Goals')
+            ],
+          )),
           BottomNavigationBarItem(
               icon: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 1.0)),
-                  Icon(CupertinoIcons.person),
-                  Text('Profile')
-                ],
-              )),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 1.0)),
+              Icon(CupertinoIcons.person),
+              Text('Profile')
+            ],
+          )),
           BottomNavigationBarItem(
               icon: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(padding: EdgeInsets.only(top: 1.0)),
-                  Icon(CupertinoIcons.settings),
-                  Text('Settings')
-                ],
-              ))
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 1.0)),
+              Icon(CupertinoIcons.settings),
+              Text('Settings')
+            ],
+          ))
         ]),
         tabBuilder: (context, index) {
           switch (index) {
-             case 0:
-               return const HomeScreen();
+            case 0:
+              return const HomeScreen();
             case 1:
-               return const WorkoutScreen();
+              return const WorkoutScreen();
             case 2:
-              return NutritionScreen();
+              return const NutritionScreen();
             case 3:
-              return GoalsScreen();
+              return const GoalsScreen();
             case 4:
-              return ProfileScreen();
+              return const ProfileScreen();
             case 5:
-              return SettingsScreen();
+              return const SettingsScreen();
             default:
               return const HomeScreen();
           }

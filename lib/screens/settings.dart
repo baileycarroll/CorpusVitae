@@ -21,14 +21,15 @@ class SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             children: [
               Card(
-                margin: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                margin:
+                    const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                 shadowColor: CupertinoTheme.of(context).primaryColor,
                 elevation: 10.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: ListTile(
-                  title: Text('Dark Mode'),
+                  title: const Text('Dark Mode'),
                   trailing: CupertinoSwitch(
                     value: true,
                     onChanged: (bool value) {},
@@ -36,14 +37,15 @@ class SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               Card(
-                margin: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                margin:
+                    const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                 shadowColor: CupertinoTheme.of(context).primaryColor,
                 elevation: 10.0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: ListTile(
-                  title: Text('Comprehensive BMI'),
+                  title: const Text('Comprehensive BMI'),
                   trailing: CupertinoSwitch(
                     value: true,
                     onChanged: (bool value) {},

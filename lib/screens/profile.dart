@@ -29,11 +29,14 @@ class ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       Center(
-                        child: Icon(Icons.account_circle_sharp, color: CupertinoTheme.of(context).primaryContrastingColor, size: 96),
+                        child: Icon(Icons.account_circle_sharp,
+                            color: CupertinoTheme.of(context)
+                                .primaryContrastingColor,
+                            size: 96),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       Card(
                         shadowColor: CupertinoTheme.of(context).primaryColor,
                         elevation: 10.0,
@@ -46,21 +49,69 @@ class ProfileScreenState extends State<ProfileScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('John Doe', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                                SizedBox(width: 8),
-                                Text('johnd@example.com', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
+                                Text('John Doe',
+                                    style: TextStyle(
+                                      color: CupertinoTheme.of(context)
+                                          .primaryContrastingColor,
+                                      fontSize: 24,
+                                    )),
+                                const SizedBox(width: 8),
+                                Text('johnd@example.com',
+                                    style: TextStyle(
+                                      color: CupertinoTheme.of(context)
+                                          .primaryContrastingColor,
+                                      fontSize: 24,
+                                    )),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 16,),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Card(
+                          shadowColor: CupertinoTheme.of(context).primaryColor,
+                          elevation: 10.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('${Random().nextInt(40) + 18}',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                      const SizedBox(width: 16),
+                                      Text('Male',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                      const SizedBox(width: 16),
+                                      Text('6\'2"',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                      const SizedBox(width: 16),
+                                      Text('180 lbs',
+                                          style: TextStyle(
+                                            color: CupertinoTheme.of(context)
+                                                .primaryContrastingColor,
+                                            fontSize: 24,
+                                          )),
+                                    ],
+                                  )))),
+                      const SizedBox(height: 16),
                       Card(
                         shadowColor: CupertinoTheme.of(context).primaryColor,
                         elevation: 10.0,
@@ -73,63 +124,32 @@ class ProfileScreenState extends State<ProfileScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('${Random().nextInt(40)+18}', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                                SizedBox(width: 16),
-                                Text('Male', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                                SizedBox(width: 16),
-                                Text('6\'2"', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                                SizedBox(width: 16),
-                                Text('180 lbs', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                              ],
-                            )
-                          )
-                        )
-                      ),
-                      SizedBox(height: 16),
-                      Card(
-                        shadowColor: CupertinoTheme.of(context).primaryColor,
-                        elevation: 10.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('BMI: ${Random().nextInt(40)+18}', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                                SizedBox(width: 16),
-                                Text('BMR: ${Random().nextInt(40)+18}', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
-                                SizedBox(width: 16),
-                                Text('TDEE: ${Random().nextInt(40)+18}', style: TextStyle(
-                                  color: CupertinoTheme.of(context).primaryContrastingColor,
-                                  fontSize: 24,
-                                )),
+                                Text('BMI: ${Random().nextInt(40) + 18}',
+                                    style: TextStyle(
+                                      color: CupertinoTheme.of(context)
+                                          .primaryContrastingColor,
+                                      fontSize: 24,
+                                    )),
+                                const SizedBox(width: 16),
+                                Text('BMR: ${Random().nextInt(40) + 18}',
+                                    style: TextStyle(
+                                      color: CupertinoTheme.of(context)
+                                          .primaryContrastingColor,
+                                      fontSize: 24,
+                                    )),
+                                const SizedBox(width: 16),
+                                Text('TDEE: ${Random().nextInt(40) + 18}',
+                                    style: TextStyle(
+                                      color: CupertinoTheme.of(context)
+                                          .primaryContrastingColor,
+                                      fontSize: 24,
+                                    )),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
@@ -148,16 +168,20 @@ class ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Column(
                       children: [
-                        Icon(Icons.edit, color: CupertinoTheme.of(context).primaryContrastingColor),
+                        Icon(Icons.edit,
+                            color: CupertinoTheme.of(context)
+                                .primaryContrastingColor),
                       ],
                     ),
                     const SizedBox(width: 8),
                     Column(
                       children: [
-                        Text('Edit Profile', style: TextStyle(
-                          color: CupertinoTheme.of(context).primaryContrastingColor,
-                          fontSize: 24,
-                        )),
+                        Text('Edit Profile',
+                            style: TextStyle(
+                              color: CupertinoTheme.of(context)
+                                  .primaryContrastingColor,
+                              fontSize: 24,
+                            )),
                       ],
                     ),
                   ],
