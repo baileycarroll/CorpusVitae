@@ -94,7 +94,7 @@ class App extends StatelessWidget {
              case 0:
                return const HomeScreen();
             case 1:
-               return WorkoutScreen();
+               return const WorkoutScreen();
             // case 2:
             //   return NutritionLogScreen();
             // case 3:
