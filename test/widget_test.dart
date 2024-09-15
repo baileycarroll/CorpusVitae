@@ -98,11 +98,8 @@ void main() {
     await tester.pumpWidget(const App());
     await tester.tap(find.byIcon(Icons.account_circle));
     await tester.pump();
-    expect(find.text('Name'), findsOneWidget);
-    expect(find.text('Age'), findsOneWidget);
-    expect(find.text('Weight'), findsOneWidget);
-    expect(find.text('Height'), findsOneWidget);
-    expect(find.text('Sex'), findsOneWidget);
+    expect(find.text('John Doe'), findsOneWidget);
+    expect(find.text('johnd@example.com'), findsOneWidget);
     expect(find.text('BMI'), findsOneWidget);
     expect(find.text('BMR'), findsOneWidget);
     expect(find.text('TDEE'), findsOneWidget);
