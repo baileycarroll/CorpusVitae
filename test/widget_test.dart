@@ -96,13 +96,13 @@ void main() {
   // Test for the Profile Page
   testWidgets('Testing for the Profile Page', (WidgetTester tester) async {
     await tester.pumpWidget(const App());
-    await tester.tap(find.byIcon(Icons.account_circle));
+    await tester.tap(find.byIcon(CupertinoIcons.person));
     await tester.pump();
     expect(find.text('John Doe'), findsOneWidget);
     expect(find.text('johnd@example.com'), findsOneWidget);
-    expect(find.text('BMI'), findsOneWidget);
-    expect(find.text('BMR'), findsOneWidget);
-    expect(find.text('TDEE'), findsOneWidget);
+    expect(find.textContaining('BMI'), findsOneWidget);
+    expect(find.textContaining('BMR'), findsOneWidget);
+    expect(find.textContaining('TDEE'), findsOneWidget);
     expect(find.text('Edit Profile'), findsOneWidget);
   });
   // Test for the Settings Page
@@ -110,7 +110,7 @@ void main() {
     await tester.pumpWidget(const App());
     await tester.tap(find.byIcon(CupertinoIcons.settings));
     await tester.pump();
-    expect(find.byType(Switch), findsNWidgets(2));
+    expect(find.byType(CupertinoSwitch), findsNWidgets(2));
     expect(find.text('Dark Mode'), findsOneWidget);
     expect(find.text('Comprehensive BMI'), findsOneWidget);
   });
