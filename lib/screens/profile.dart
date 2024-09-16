@@ -55,7 +55,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   String convertHeight(double heightInches) {
     int feet = (heightInches / 12).floor();
     int inches = (heightInches % 12).floor();
-    return '$feet\' $inches\"';
+    return '$feet\' $inches"';
   }
 
   Future<void> _loadProfile() async {
