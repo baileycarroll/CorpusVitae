@@ -2,12 +2,12 @@ import 'package:corpus_vitae/utils/preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/home.dart';
-import 'screens/workouts.dart';
-import 'screens/nutrition.dart';
 import 'screens/goals.dart';
+import 'screens/home.dart';
+import 'screens/nutrition.dart';
 import 'screens/profile.dart';
 import 'screens/settings.dart';
+import 'screens/workouts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

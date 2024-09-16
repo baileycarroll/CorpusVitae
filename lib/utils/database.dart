@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,13 +11,11 @@ class DatabaseHelper {
   DatabaseHelper._internal();
 
   Future<Database> get database async {
-    if (_database != null) {
-      _database = await _initDB();
-    }
+    _database ??= await initializeDatabase();
     return _database!;
   }
 
-  Future<Database> _initDB() async {
+  Future<Database> initializeDatabase() async {
     String path = join(await getDatabasesPath(), 'database.db');
     return await openDatabase(
       path,
@@ -26,7 +25,7 @@ class DatabaseHelper {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute('''
+    await db.execute("""
       CREATE TABLE profile(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -36,15 +35,15 @@ class DatabaseHelper {
         age REAL,
         sex TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE exercise_types(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         exercise_type_id INTEGER,
         name TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       INSERT INTO exercise_types(id, exercise_type_id, name) VALUES
       (1, NULL, 'Cardio'),
       (2, NULL, 'Upper Body'),
@@ -53,17 +52,17 @@ class DatabaseHelper {
       (5, 2, 'Shoulders'),
       (6, 2, 'Arms'),
       (7, NULL, 'Legs'),
-      (8, NULL, 'Core');
+      (8, NULL, 'Core'),
       (9, NULL, 'Stretching');
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE exercises(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         exercise_type_id INTEGER,
         name TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       INSERT INTO exercises(id, exercise_type_id, name) VALUES
       (1, 1, 'Elliptical'),
       (2, 1, 'Treadmill'),
@@ -72,7 +71,7 @@ class DatabaseHelper {
       (5, 1, 'Rowing Machine'),
       (6, 1, 'Free Walk'),
       (7, 1, 'Free Run'),
-      (8, 1, 'Free Bike')
+      (8, 1, 'Free Bike'),
       (9, 3, 'Chest Press'),
       (10, 3, 'Incline Press'),
       (11, 3, 'Decline Press'),
@@ -137,8 +136,8 @@ class DatabaseHelper {
       (70, 9, 'Wrist Stretch'),
       (71, 9, 'Forearm Stretch'),
       (72, 9, 'Full Body Stretch');
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE workouts(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -150,8 +149,8 @@ class DatabaseHelper {
         calories INTEGER,
         notes TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE workout_exercises(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         workout_id INTEGER,
@@ -164,15 +163,15 @@ class DatabaseHelper {
         calories INTEGER,
         notes TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE meal_types(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         meal_type_id INTEGER,
         name TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE meals(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         meal_type_id INTEGER,
@@ -181,8 +180,8 @@ class DatabaseHelper {
         calories INTEGER,
         notes TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE meal_items(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         meal_id INTEGER,
@@ -192,15 +191,15 @@ class DatabaseHelper {
         water_oz INTEGER,
         notes TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE goal_types(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         goal_type_id INTEGER,
         name TEXT
       );
-    ''');
-    await db.execute('''
+    """);
+    await db.execute("""
       CREATE TABLE goals(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         goal_type_id INTEGER,
@@ -220,7 +219,7 @@ class DatabaseHelper {
         calories_burned INTEGER,
         notes TEXT
       );
-    ''');
+    """);
   }
 
   // Profile

@@ -1,7 +1,8 @@
+import 'package:corpus_vitae/utils/preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:corpus_vitae/utils/preferences.dart';
 
+import '../utils/database.dart';
 import '../utils/height_picker.dart';
 import '../utils/sex_picker.dart';
 
@@ -28,17 +29,53 @@ class ProfileScreenState extends State<ProfileScreen> {
   int _selectedInches = 6;
   int _heightInInches = 66; // Default value
 
-  String _name = 'John Dee';
-  String _email = 'johnd@example.com';
-  String _age = '25';
-  String _height = '5\' 6"';
-  String _weight = '175';
-  String _sex = 'Male';
+  late String _name;
+  late String _email;
+  late String _age;
+  late String _height;
+  late String _weight;
+  late String _sex;
+
+  //Import Database
+  final DatabaseHelper dbHelper = DatabaseHelper();
 
   @override
   void initState() {
     super.initState();
+    _name = 'John Doe';
+    _email = 'john@example.com';
+    _age = '24.0';
+    _height = '5\' 6"';
+    _weight = '176.0';
+    _sex = 'Male';
+    _loadProfile();
     sharedPrefs.addListener(_updateComprehensiveBMI);
+  }
+
+  String convertHeight(double heightInches) {
+    int feet = (heightInches / 12).floor();
+    int inches = (heightInches % 12).floor();
+    return '$feet\' $inches\"';
+  }
+
+  Future<void> _loadProfile() async {
+    final profile = await dbHelper.getProfile();
+    if (profile != null) {
+      setState(() {
+        _name = profile['name'];
+        _email = profile['email'];
+        _age = profile['age'].toString();
+        _height = convertHeight(profile['height']);
+        _weight = profile['weight'].toString();
+        _sex = profile['sex'];
+        _nameController.text = _name;
+        _emailController.text = _email;
+        _ageController.text = _age;
+        _heightController.text = _height;
+        _weightController.text = _weight;
+        _sexController.text = _sex;
+      });
+    }
   }
 
   @override
@@ -59,7 +96,7 @@ class ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  void _saveProfile() {
+  Future<void> _saveProfile() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _name = _nameController.text;
@@ -72,6 +109,29 @@ class ProfileScreenState extends State<ProfileScreen> {
         _sex = _sexController.text;
         _isEditing = false;
       });
+      final profile = {
+        'id': 1,
+        'name': _name,
+        'email': _email,
+        'height': _heightInInches,
+        'weight': double.parse(_weight),
+        'age': double.parse(_age),
+        'sex': _sex,
+      };
+      await dbHelper.saveProfile(profile);
+    }
+    final profile = await dbHelper.getProfile();
+    final profileInfo = {
+      'id': 1,
+      'name': _name,
+      'email': _email,
+      'height': _heightInInches,
+      'weight': double.parse(_weight),
+      'age': double.parse(_age),
+      'sex': _sex,
+    };
+    if (profile == null) {
+      await dbHelper.createProfile(profileInfo);
     }
   }
 
@@ -137,7 +197,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                     email: _email,
                     age: _age,
                     height: _height,
-                    weight: int.parse(_weight),
+                    weight: _weight,
                     heightInInches: _heightInInches,
                     sex: _sex,
                     comprehensiveBMIToggle: _comprehensiveBMIToggle,
@@ -162,7 +222,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color:
                             CupertinoTheme.of(context).primaryContrastingColor,
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -224,7 +284,7 @@ class _BuildProfileForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text('Name: ', style: TextStyle(fontSize: 24)),
+                  const Text('Name: ', style: TextStyle(fontSize: 18)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: CupertinoTextField(
@@ -232,11 +292,11 @@ class _BuildProfileForm extends StatelessWidget {
                       placeholder: 'Name',
                       placeholderStyle: const TextStyle(
                         color: Colors.grey,
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       scribbleEnabled: false,
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -262,7 +322,7 @@ class _BuildProfileForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text('Email: ', style: TextStyle(fontSize: 24)),
+                  const Text('Email: ', style: TextStyle(fontSize: 18)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: CupertinoTextField(
@@ -270,10 +330,10 @@ class _BuildProfileForm extends StatelessWidget {
                       placeholder: 'Email',
                       placeholderStyle: const TextStyle(
                         color: Colors.grey,
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       scribbleEnabled: false,
                       decoration: BoxDecoration(
@@ -300,18 +360,21 @@ class _BuildProfileForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text('Age: ', style: TextStyle(fontSize: 24)),
+                  const Text('Age: ', style: TextStyle(fontSize: 18)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: CupertinoTextField(
                       controller: ageController,
                       placeholder: 'Age',
+                      suffix: const Padding(
+                          padding: EdgeInsets.all(8.0), child: Text('years')),
+                      suffixMode: OverlayVisibilityMode.always,
                       placeholderStyle: const TextStyle(
                         color: Colors.grey,
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       scribbleEnabled: false,
                       decoration: BoxDecoration(
@@ -338,7 +401,7 @@ class _BuildProfileForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text('Height: ', style: TextStyle(fontSize: 24)),
+                  const Text('Height: ', style: TextStyle(fontSize: 18)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: GestureDetector(
@@ -366,18 +429,20 @@ class _BuildProfileForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text('Weight: ', style: TextStyle(fontSize: 24)),
+                  const Text('Weight: ', style: TextStyle(fontSize: 18)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: CupertinoTextField(
                       controller: weightController,
                       placeholder: 'Weight',
+                      suffix: const Padding(
+                          padding: EdgeInsets.all(8.0), child: Text('lbs')),
                       placeholderStyle: const TextStyle(
                         color: Colors.grey,
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 18,
                       ),
                       scribbleEnabled: false,
                       decoration: BoxDecoration(
@@ -404,7 +469,7 @@ class _BuildProfileForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  const Text('Sex: ', style: TextStyle(fontSize: 24)),
+                  const Text('Sex: ', style: TextStyle(fontSize: 18)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: GestureDetector(
@@ -415,10 +480,10 @@ class _BuildProfileForm extends StatelessWidget {
                             placeholder: 'Sex',
                             placeholderStyle: const TextStyle(
                               color: Colors.grey,
-                              fontSize: 24,
+                              fontSize: 18,
                             ),
                             style: const TextStyle(
-                              fontSize: 24,
+                              fontSize: 18,
                             ),
                             scribbleEnabled: false,
                             decoration: BoxDecoration(
@@ -458,10 +523,10 @@ class _BuildProfileForm extends StatelessWidget {
         placeholder: placeholder,
         placeholderStyle: const TextStyle(
           color: Colors.grey,
-          fontSize: 24,
+          fontSize: 18,
         ),
         style: const TextStyle(
-          fontSize: 24,
+          fontSize: 18,
         ),
         scribbleEnabled: false,
         decoration: BoxDecoration(
@@ -482,7 +547,7 @@ class _BuildProfileDisplay extends StatelessWidget {
   final String age;
   final String height;
   final int heightInInches;
-  final int weight;
+  final String weight;
   final String sex;
   final bool comprehensiveBMIToggle;
 
@@ -530,14 +595,14 @@ class _BuildProfileDisplay extends StatelessWidget {
                             style: TextStyle(
                               color: CupertinoTheme.of(context)
                                   .primaryContrastingColor,
-                              fontSize: 24,
+                              fontSize: 18,
                             )),
                         const SizedBox(width: 8),
                         Text(email,
                             style: TextStyle(
                               color: CupertinoTheme.of(context)
                                   .primaryContrastingColor,
-                              fontSize: 24,
+                              fontSize: 18,
                             )),
                       ],
                     ),
@@ -559,93 +624,122 @@ class _BuildProfileDisplay extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(age,
+                              Text(
+                                  '${double.parse(age).toStringAsFixed(0)} years',
                                   style: TextStyle(
                                     color: CupertinoTheme.of(context)
                                         .primaryContrastingColor,
-                                    fontSize: 24,
+                                    fontSize: 18,
                                   )),
                               const SizedBox(width: 16),
                               Text(sex,
                                   style: TextStyle(
                                     color: CupertinoTheme.of(context)
                                         .primaryContrastingColor,
-                                    fontSize: 24,
+                                    fontSize: 18,
                                   )),
                               const SizedBox(width: 16),
                               Text(height,
                                   style: TextStyle(
                                     color: CupertinoTheme.of(context)
                                         .primaryContrastingColor,
-                                    fontSize: 24,
+                                    fontSize: 18,
                                   )),
                               const SizedBox(width: 16),
-                              Text(weight.toString(),
+                              Text(
+                                  '${double.parse(weight).toStringAsFixed(0)} lbs',
                                   style: TextStyle(
                                     color: CupertinoTheme.of(context)
                                         .primaryContrastingColor,
-                                    fontSize: 24,
+                                    fontSize: 18,
                                   )),
                             ],
                           )))),
               const SizedBox(height: 16),
-              Card(
-                shadowColor: CupertinoTheme.of(context).primaryColor,
-                elevation: 10.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: comprehensiveBMIToggle
-                          ? [
-                              Text(
-                                  'BMI: ${(weight / (heightInInches * heightInInches) * 703).toStringAsFixed(0)}',
+              comprehensiveBMIToggle
+                  ? Column(children: [
+                      Card(
+                          shadowColor: CupertinoTheme.of(context).primaryColor,
+                          elevation: 10.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      'Body Mass Index (BMI): ${(double.parse(weight) / (heightInInches * heightInInches) * 703).toStringAsFixed(0)}',
+                                      style: TextStyle(
+                                        color: CupertinoTheme.of(context)
+                                            .primaryContrastingColor,
+                                        fontSize: 18,
+                                      ))))),
+                      const SizedBox(height: 16),
+                      Card(
+                          shadowColor: CupertinoTheme.of(context).primaryColor,
+                          elevation: 10.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    sex == 'Male'
+                                        ? 'Base Metabolic Rate (BMR): ${((13.397 * double.parse(weight)) + (4.799 * heightInInches) - (5.677 * double.parse(age)) + 88.362).toStringAsFixed(0)} cal'
+                                        : 'Base Metabolic Rate (BMR): ${((9.247 * double.parse(weight)) + (3.098 * heightInInches) - (4.330 * double.parse(age)) + 447.593).toStringAsFixed(0)} cal',
+                                    style: TextStyle(
+                                      color: CupertinoTheme.of(context)
+                                          .primaryContrastingColor,
+                                      fontSize: 18,
+                                    ),
+                                  )))),
+                      const SizedBox(height: 16),
+                      Card(
+                          shadowColor: CupertinoTheme.of(context).primaryColor,
+                          elevation: 10.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                              child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              sex == 'Male'
+                                  ? 'Total Daily Energy Expenditure (TDEE) : ${((10 * double.parse(weight)) + (6.25 * heightInInches) - (5 * double.parse(age)) + 5).toStringAsFixed(0)} cal'
+                                  : 'Total Daily Energy Expenditure (TDEE) : ${((10 * double.parse(weight)) + (6.25 * heightInInches) - (5 * double.parse(age)) - 161).toStringAsFixed(0)} cal',
+                              style: TextStyle(
+                                color: CupertinoTheme.of(context)
+                                    .primaryContrastingColor,
+                                fontSize: 18,
+                              ),
+                            ),
+                          )))
+                    ])
+                  : Column(
+                      children: [
+                        Card(
+                          shadowColor: CupertinoTheme.of(context).primaryColor,
+                          elevation: 10.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                  'Body Mass Index (BMI): ${(double.parse(weight) / (heightInInches * heightInInches) * 703).toStringAsFixed(0)}',
                                   style: TextStyle(
                                     color: CupertinoTheme.of(context)
                                         .primaryContrastingColor,
-                                    fontSize: 20,
+                                    fontSize: 18,
                                   )),
-                              const SizedBox(width: 16),
-                              Text(
-                                sex == 'Male'
-                                    ? 'BMR: ${((13.397 * weight) + (4.799 * heightInInches) - (5.677 * int.parse(age)) + 88.362).toStringAsFixed(0)} cal'
-                                    : 'BMR: ${((9.247 * weight) + (3.098 * heightInInches) - (4.330 * int.parse(age)) + 447.593).toStringAsFixed(0)} cal',
-                                style: TextStyle(
-                                  color: CupertinoTheme.of(context)
-                                      .primaryContrastingColor,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Text(
-                                sex == 'Male'
-                                    ? 'TDEE: ${((10 * weight) + (6.25 * heightInInches) - (5 * int.parse(age)) + 5).toStringAsFixed(0)} cal'
-                                    : 'TDEE: ${((10 * weight) + (6.25 * heightInInches) - (5 * int.parse(age)) - 161).toStringAsFixed(0)} cal',
-                                style: TextStyle(
-                                  color: CupertinoTheme.of(context)
-                                      .primaryContrastingColor,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ]
-                          : [
-                              Text(
-                                  'BMI: ${(weight / (heightInInches * heightInInches) * 703).toStringAsFixed(0)}',
-                                  style: TextStyle(
-                                    color: CupertinoTheme.of(context)
-                                        .primaryContrastingColor,
-                                    fontSize: 24,
-                                  )),
-                            ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
             ],
           ),
         ),
