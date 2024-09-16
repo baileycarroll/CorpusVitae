@@ -33,17 +33,20 @@
 *   b. Test for the Comprehensive BMI Toggle
 */
 
+import 'package:corpus_vitae/main.dart';
 import 'package:corpus_vitae/screens/profile.dart';
 import 'package:corpus_vitae/screens/settings.dart';
 import 'package:corpus_vitae/utils/preferences.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:corpus_vitae/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 Future<void> main() async {
+  // Initialize the database factory
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
   // Shared Preferences
   SharedPreferences.setMockInitialValues(
       {'theme': false, 'comprehensiveBMI': false});

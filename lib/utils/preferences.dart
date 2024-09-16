@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefs {
-  late final SharedPreferences _sharedPrefs;
+  late SharedPreferences _sharedPrefs;
   final _listeners = <VoidCallback>[];
 
   static final SharedPrefs _instance = SharedPrefs._internal();

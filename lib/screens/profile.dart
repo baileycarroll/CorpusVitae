@@ -43,7 +43,7 @@ class ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _name = 'John Doe';
-    _email = 'john@example.com';
+    _email = 'johnd@example.com';
     _age = '24.0';
     _height = '5\' 6"';
     _weight = '176.0';
@@ -177,68 +177,71 @@ class ProfileScreenState extends State<ProfileScreen> {
       //   middle: Text('Profile'),
       // ),
       child: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            _isEditing
-                ? _BuildProfileForm(
-                    formKey: _formKey,
-                    nameController: _nameController,
-                    emailController: _emailController,
-                    ageController: _ageController,
-                    heightController: _heightController,
-                    weightController: _weightController,
-                    sexController: _sexController,
-                    showHeightPicker: () => _showHeightPicker(context),
-                    showSexPicker: () => _showSexPicker(context),
-                  )
-                : _BuildProfileDisplay(
-                    name: _name,
-                    email: _email,
-                    age: _age,
-                    height: _height,
-                    weight: _weight,
-                    heightInInches: _heightInInches,
-                    sex: _sex,
-                    comprehensiveBMIToggle: _comprehensiveBMIToggle,
-                  ),
-            Card(
-              shadowColor: CupertinoTheme.of(context).primaryColor,
-              elevation: 10.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(70.0),
-              ),
-              child: CupertinoButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      _isEditing ? Icons.save : Icons.edit,
-                      color: CupertinoTheme.of(context).primaryContrastingColor,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 24),
+              _isEditing
+                  ? _BuildProfileForm(
+                      formKey: _formKey,
+                      nameController: _nameController,
+                      emailController: _emailController,
+                      ageController: _ageController,
+                      heightController: _heightController,
+                      weightController: _weightController,
+                      sexController: _sexController,
+                      showHeightPicker: () => _showHeightPicker(context),
+                      showSexPicker: () => _showSexPicker(context),
+                    )
+                  : _BuildProfileDisplay(
+                      name: _name,
+                      email: _email,
+                      age: _age,
+                      height: _height,
+                      weight: _weight,
+                      heightInInches: _heightInInches,
+                      sex: _sex,
+                      comprehensiveBMIToggle: _comprehensiveBMIToggle,
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      _isEditing ? 'Save Profile' : 'Edit Profile',
-                      style: TextStyle(
+              Card(
+                shadowColor: CupertinoTheme.of(context).primaryColor,
+                elevation: 10.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(70.0),
+                ),
+                child: CupertinoButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        _isEditing ? Icons.save : Icons.edit,
                         color:
                             CupertinoTheme.of(context).primaryContrastingColor,
-                        fontSize: 18,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 8),
+                      Text(
+                        _isEditing ? 'Save Profile' : 'Edit Profile',
+                        style: TextStyle(
+                          color: CupertinoTheme.of(context)
+                              .primaryContrastingColor,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (_isEditing) {
+                        _saveProfile();
+                      } else {
+                        _isEditing = true;
+                      }
+                    });
+                  },
                 ),
-                onPressed: () {
-                  setState(() {
-                    if (_isEditing) {
-                      _saveProfile();
-                    } else {
-                      _isEditing = true;
-                    }
-                  });
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
