@@ -31,8 +31,8 @@ class ProfileScreenState extends State<ProfileScreen> {
   String _name = 'John Dee';
   String _email = 'johnd@example.com';
   String _age = '25';
-  String _height = '180 cm';
-  String _weight = '75 kg';
+  String _height = '180';
+  String _weight = '75';
   String _sex = 'Male';
 
   @override
