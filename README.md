@@ -22,12 +22,12 @@ fitness progress, and keep a comprehensive log of my health and fitness journey.
   - ✖ Track Duration
   - ✖ Track Distance
   - ✖ Track Calories Burned
-- ✖ User Profile
-  - ✖ Name, Email
-  - ✖ Height, Weight, Age, Sex
-  - ✖ Toggleable Body Mass Index (BMI)
-    - ✖ Basic BMI Only
-    - ✖ Comprehensive BMI (BMI, BMR, TDEE)
+- ✔ User Profile
+  - ✔ Name, Email
+  - ✔ Height, Weight, Age, Sex
+  - ✔ Toggleable Body Mass Index (BMI)
+    - ✔ Basic BMI Only
+    - ✔ Comprehensive BMI (BMI, BMR, TDEE)
 - ✖ Goals
   - ✖ Workout Related Goals
     - ✖ Weight, Sets, Reps
