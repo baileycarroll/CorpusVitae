@@ -104,7 +104,7 @@ class ProfileScreenState extends State<ProfileScreen> {
         _age = _ageController.text;
         _height = "$_selectedFeet' $_selectedInches\"";
         _heightController.text = _height;
-        _heightInInches = _selectedFeet * 12 + _selectedInches;
+        _heightInInches = (_selectedFeet * 12) + _selectedInches;
         _weight = _weightController.text;
         _sex = _sexController.text;
         _isEditing = false;
