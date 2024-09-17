@@ -173,9 +173,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      // navigationBar: const CupertinoNavigationBar(
-      //   middle: Text('Profile'),
-      // ),
       child: SafeArea(
         child: SingleChildScrollView(
           child: Column(

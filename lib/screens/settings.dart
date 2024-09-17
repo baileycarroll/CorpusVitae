@@ -16,9 +16,6 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Settings'),
-      ),
       child: SafeArea(
         // this should be a list of settings each in their own card with a switch to toggle them
         child: SingleChildScrollView(

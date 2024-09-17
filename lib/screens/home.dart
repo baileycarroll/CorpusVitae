@@ -7,9 +7,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Corpus Vitae'),
-      ),
       child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
