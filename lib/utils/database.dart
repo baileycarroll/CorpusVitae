@@ -39,21 +39,19 @@ class DatabaseHelper {
     await db.execute("""
       CREATE TABLE exercise_types(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        exercise_type_id INTEGER,
         name TEXT
       );
     """);
     await db.execute("""
-      INSERT INTO exercise_types(id, exercise_type_id, name) VALUES
-      (1, NULL, 'Cardio'),
-      (2, NULL, 'Upper Body'),
-      (3, 2, 'Chest'),
-      (4, 2, 'Back'),
-      (5, 2, 'Shoulders'),
-      (6, 2, 'Arms'),
-      (7, NULL, 'Legs'),
-      (8, NULL, 'Core'),
-      (9, NULL, 'Stretching');
+      INSERT INTO exercise_types(id, name) VALUES
+      (1, 'Cardio'),
+      (3, 'Chest'),
+      (4, 'Back'),
+      (5, 'Shoulders'),
+      (6, 'Arms'),
+      (7, 'Legs'),
+      (8, 'Core'),
+      (9, 'Stretching');
     """);
     await db.execute("""
       CREATE TABLE exercises(
@@ -295,15 +293,22 @@ class DatabaseHelper {
     return await db.query('workouts');
   }
 
-  Future<void> createWorkout(Map<String, dynamic> workout) async {
+  Future<int> createWorkout(Map<String, dynamic> workout) async {
     Database db = await database;
     await db.insert('workouts', workout);
+    // Return ID of most recently created workout
+    int workoutId = Sqflite.firstIntValue(
+            await db.rawQuery('SELECT last_insert_rowid()')) ??
+        0;
+    return workoutId;
   }
 
   Future<void> updateWorkout(Map<String, dynamic> workout) async {
     Database db = await database;
     await db.update('workouts', workout,
-        where: 'id = ?', whereArgs: [workout['id']]);
+        where: 'id = ?',
+        whereArgs: [workout['id']],
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<Map<String, dynamic>?> getGetWorkoutByID(int exerciseTypeId) async {
@@ -319,10 +324,14 @@ class DatabaseHelper {
     return await db.query('workout_exercises');
   }
 
-  Future<void> createWorkoutExercise(
-      Map<String, dynamic> workoutExercise) async {
+  Future<int> addWorkoutExercise(Map<String, dynamic> workoutExercise) async {
     Database db = await database;
     await db.insert('workout_exercises', workoutExercise);
+    // Return ID of most recently created workout exercise
+    int workoutExerciseId = Sqflite.firstIntValue(
+            await db.rawQuery('SELECT last_insert_rowid()')) ??
+        0;
+    return workoutExerciseId;
   }
 
   Future<void> updateWorkoutExercise(
