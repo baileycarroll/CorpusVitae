@@ -1,11 +1,12 @@
 // main.dart
 
 // Base Packages
-import 'package:corpus_vitae/theme.dart'; // Theme Data for the App
+import 'package:corpus_vitae/theme.dart' as AppTheme; // Theme Data for the App
 import 'package:corpus_vitae/ui/screens/fitness_tracking.dart'; // Import your Fitness Tracking screen
 // Screens
 import 'package:corpus_vitae/ui/screens/home.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const CorpusVitaeApp());
@@ -17,7 +18,7 @@ class CorpusVitaeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: Theme.lightTheme,
+      theme: AppTheme.Theme.lightTheme,
       home: const MainTabScaffold(), // Use the MainTabScaffold as the home
       debugShowCheckedModeBanner: false,
     );
@@ -57,9 +58,11 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.heart),
+            icon: Icon(Icons.fitness_center),
             label: 'Fitness',
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.restaurant_menu), label: 'Nutrition')
         ],
       ),
       tabBuilder: (context, index) {

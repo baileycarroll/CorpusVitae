@@ -18,8 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   // You can add state variables here if needed
-  double progress = 180.0;
-  double goal = 500.0;
+  double calBurnedProgress = 180.0;
+  double calBurnedGoal = 500.0;
+  double calEatenProgress = 1300.0;
+  double calEatenGoal = 2200.0;
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +57,16 @@ class HomeScreenState extends State<HomeScreen> {
                         children: [
                           Column(children: <Widget>[
                             CircularProgressBar(
-                              progress: progress,
-                              goal: goal,
+                              progress: calBurnedProgress,
+                              goal: calBurnedGoal,
                             ),
                           ]),
                           const SizedBox(width: 24.0),
                           Column(
                             children: [
                               Text(
-                                "$progress / $goal Cal. Burned",
+                                "$calBurnedProgress / $calBurnedGoal Cal. "
+                                "Burned",
                                 style: const TextStyle(fontSize: 18.0),
                               ),
                               const SizedBox(height: 16.0),
@@ -77,6 +80,42 @@ class HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           )
+                        ],
+                      ),
+                    )),
+                const SizedBox(height: 16.0),
+                Card(
+                    shadowColor: CupertinoTheme.of(context).primaryColor,
+                    elevation: 8.0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "$calEatenProgress / $calEatenGoal Cal. Eaten",
+                                style: const TextStyle(fontSize: 18.0),
+                              ),
+                              const SizedBox(height: 16.0),
+                              CupertinoButton.filled(
+                                onPressed: () {
+                                  widget.tabController.index = 2;
+                                },
+                                child: const Text('Log Meal',
+                                    style: TextStyle(
+                                        color: CupertinoColors.white)),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 24.0),
+                          Column(children: <Widget>[
+                            CircularProgressBar(
+                              progress: calEatenProgress,
+                              goal: calEatenGoal,
+                            ),
+                          ]),
                         ],
                       ),
                     )),
