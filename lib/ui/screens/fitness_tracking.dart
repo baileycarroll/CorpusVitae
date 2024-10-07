@@ -1,11 +1,9 @@
-// fitness_tracking.dart
-
 // Base Packages
+import 'package:flutter/cupertino.dart';
 // Widgets
 import 'package:corpus_vitae/ui/screens/workout_history.dart';
 import 'package:corpus_vitae/ui/widgets/circular_progress.dart';
 import 'package:corpus_vitae/ui/widgets/exercise_types_dropdown.dart';
-import 'package:flutter/cupertino.dart';
 // Date Formatting
 import 'package:intl/intl.dart';
 

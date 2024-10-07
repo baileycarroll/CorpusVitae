@@ -1,8 +1,8 @@
 // Base Packages
-// Widgets
-import 'package:corpus_vitae/ui/widgets/circular_progress.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// Widgets
+import 'package:corpus_vitae/ui/widgets/circular_progress.dart';
 // Date Formatting
 import 'package:intl/intl.dart';
 

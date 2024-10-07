@@ -1,12 +1,11 @@
 // main.dart
-
-// Base Packages
-import 'package:corpus_vitae/theme.dart' as AppTheme; // Theme Data for the App
-import 'package:corpus_vitae/ui/screens/fitness_tracking.dart'; // Import your Fitness Tracking screen
-// Screens
-import 'package:corpus_vitae/ui/screens/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// Screens
+import 'package:corpus_vitae/theme.dart' as app_theme;
+import 'package:corpus_vitae/ui/screens/home.dart';
+import 'package:corpus_vitae/ui/screens/fitness_tracking.dart';
+import 'package:corpus_vitae/ui/screens/meal_tracking.dart';
 
 void main() {
   runApp(const CorpusVitaeApp());
@@ -18,7 +17,7 @@ class CorpusVitaeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: AppTheme.Theme.lightTheme,
+      theme: app_theme.Theme.lightTheme,
       home: const MainTabScaffold(), // Use the MainTabScaffold as the home
       debugShowCheckedModeBanner: false,
     );
@@ -77,6 +76,12 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             return CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
                 child: FitnessTrackingScreen(tabController: _tabController),
+              );
+            });
+          case 2:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: MealTrackingScreen(tabController: _tabController),
               );
             });
           default:
