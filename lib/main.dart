@@ -28,10 +28,10 @@ class MainTabScaffold extends StatefulWidget {
   const MainTabScaffold({super.key});
 
   @override
-  _MainTabScaffoldState createState() => _MainTabScaffoldState();
+  MainTabScaffoldState createState() => MainTabScaffoldState();
 }
 
-class _MainTabScaffoldState extends State<MainTabScaffold> {
+class MainTabScaffoldState extends State<MainTabScaffold> {
   late CupertinoTabController _tabController;
 
   @override
