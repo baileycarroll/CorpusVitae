@@ -1,147 +1,89 @@
-import 'package:corpus_vitae/utils/preferences.dart';
+// main.dart
+
+// Base Packages
+import 'package:corpus_vitae/theme.dart'; // Theme Data for the App
+import 'package:corpus_vitae/ui/screens/fitness_tracking.dart'; // Import your Fitness Tracking screen
+// Screens
+import 'package:corpus_vitae/ui/screens/home.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-import 'screens/goals.dart';
-import 'screens/home.dart';
-import 'screens/nutrition.dart';
-import 'screens/profile.dart';
-import 'screens/settings.dart';
-import 'screens/workouts.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await sharedPrefs.init();
-  runApp(const App());
+void main() {
+  runApp(const CorpusVitaeApp());
 }
 
-class App extends StatefulWidget {
-  const App({super.key});
-
-  @override
-  AppState createState() => AppState();
-}
-
-class AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-    sharedPrefs.addListener(_updateTheme);
-  }
-
-  @override
-  void dispose() {
-    sharedPrefs.removeListener(_updateTheme);
-    super.dispose();
-  }
-
-  void _updateTheme() {
-    setState(() {});
-  }
+class CorpusVitaeApp extends StatelessWidget {
+  const CorpusVitaeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: CupertinoThemeData(
-        brightness: SharedPrefs().theme ? Brightness.dark : Brightness.light,
-        primaryColor: SharedPrefs().theme
-            ? const Color(0xFF22D3EE)
-            : const Color(0xFF6200EE),
-        primaryContrastingColor: SharedPrefs().theme
-            ? const Color(0xFFFFFFFF)
-            : const Color(0xFF000000),
-        textTheme: CupertinoTextThemeData(
-          textStyle: TextStyle(
-            color: SharedPrefs().theme
-                ? const Color(0xFFFFFFFF)
-                : const Color(0xFF000000),
-            fontSize: 16.0,
+      theme: Theme.lightTheme,
+      home: const MainTabScaffold(), // Use the MainTabScaffold as the home
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class MainTabScaffold extends StatefulWidget {
+  const MainTabScaffold({super.key});
+
+  @override
+  MainTabScaffoldState createState() => MainTabScaffoldState();
+}
+
+class MainTabScaffoldState extends State<MainTabScaffold> {
+  late CupertinoTabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = CupertinoTabController(); // Initialize the controller
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose(); // Dispose the controller
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+      controller: _tabController, // Attach the controller to the scaffold
+      tabBar: CupertinoTabBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.home),
+            label: 'Home',
           ),
-        ),
-        barBackgroundColor: SharedPrefs().theme
-            ? const Color(0xFF000000)
-            : const Color(0xFFFFFFFF),
-        scaffoldBackgroundColor: SharedPrefs().theme
-            ? const Color(0xFF121212)
-            : const Color(0xFFF5F5F5),
-        applyThemeToAll: true,
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.heart),
+            label: 'Fitness',
+          ),
+        ],
       ),
-      home: CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(items: const [
-          BottomNavigationBarItem(
-              icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(padding: EdgeInsets.only(top: 1.0)),
-              Icon(CupertinoIcons.home),
-              Text('Home')
-            ],
-          )),
-          BottomNavigationBarItem(
-              icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(padding: EdgeInsets.only(top: 1.0)),
-              Icon(Icons.fitness_center),
-              Text('Workouts')
-            ],
-          )),
-          BottomNavigationBarItem(
-              icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(padding: EdgeInsets.only(top: 1.0)),
-              Icon(Icons.fastfood),
-              Text('Nutrition')
-            ],
-          )),
-          BottomNavigationBarItem(
-              icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(padding: EdgeInsets.only(top: 1.0)),
-              Icon(Icons.flag_circle),
-              Text('Goals')
-            ],
-          )),
-          BottomNavigationBarItem(
-              icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(padding: EdgeInsets.only(top: 1.0)),
-              Icon(CupertinoIcons.person),
-              Text('Profile')
-            ],
-          )),
-          BottomNavigationBarItem(
-              icon: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(padding: EdgeInsets.only(top: 1.0)),
-              Icon(CupertinoIcons.settings),
-              Text('Settings')
-            ],
-          ))
-        ]),
-        tabBuilder: (context, index) {
-          switch (index) {
-            case 0:
-              return const HomeScreen();
-            case 1:
-              return const WorkoutScreen();
-            case 2:
-              return const NutritionScreen();
-            case 3:
-              return const GoalsScreen();
-            case 4:
-              return const ProfileScreen();
-            case 5:
-              return const SettingsScreen();
-            default:
-              return const HomeScreen();
-          }
-        },
-      ),
+      tabBuilder: (context, index) {
+        switch (index) {
+          case 0:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: HomeScreen(tabController: _tabController),
+              );
+            });
+          case 1:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: FitnessTrackingScreen(tabController: _tabController),
+              );
+            });
+          default:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: HomeScreen(tabController: _tabController),
+              );
+            });
+        }
+      },
     );
   }
 }
