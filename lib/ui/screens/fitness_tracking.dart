@@ -39,175 +39,159 @@ class FitnessTrackingScreen extends StatelessWidget {
         border: null,
         backgroundColor: CupertinoTheme.of(context).primaryColor,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CupertinoButton(
-                      padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                      color: CupertinoTheme.of(context).primaryColor,
-                      onPressed: () {},
-                      child: const Text(
-                        'Start Timer',
-                        style: TextStyle(
-                          color: CupertinoColors.white,
-                        ),
-                      ),
-                    ),
-                    CupertinoButton(
-                      padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                      color: CupertinoTheme.of(context).primaryColor,
-                      onPressed: () {},
-                      child: const Text(
-                        'End Timer',
-                        style: TextStyle(
-                          color: CupertinoColors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16.0),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
+      child: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const ExercisePickerWidget(),
-                  const SizedBox(height: 16.0),
-                  const Row(
-                    children: [
-                      Expanded(
-                        child: CupertinoTextField(
-                          placeholder: 'Reps',
-                          padding: EdgeInsets.all(12.0),
-                        ),
+                  CupertinoButton.filled(
+                    padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                    onPressed: () {},
+                    child: const Text(
+                      'Start Timer',
+                      style: TextStyle(
+                        color: CupertinoColors.white,
                       ),
-                      SizedBox(width: 8.0),
-                      Expanded(
-                        child: CupertinoTextField(
-                          placeholder: 'Sets',
-                          padding: EdgeInsets.all(12.0),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                  const SizedBox(height: 16.0),
-                  const CupertinoTextField(
-                    placeholder: 'Weight',
-                    padding: EdgeInsets.all(12.0),
-                  ),
-                  const SizedBox(height: 16.0),
-                  const Row(
-                    children: [
-                      Expanded(
-                        child: CupertinoTextField(
-                          placeholder: 'Distance',
-                          padding: EdgeInsets.all(12.0),
-                        ),
+                  CupertinoButton.filled(
+                    onPressed: () {},
+                    padding: const EdgeInsets.symmetric(horizontal: 48.0),
+                    child: const Text(
+                      'End Timer',
+                      style: TextStyle(
+                        color: CupertinoColors.white,
                       ),
-                      SizedBox(width: 8.0),
-                      Expanded(
-                        child: CupertinoTextField(
-                          placeholder: 'Duration',
-                          padding: EdgeInsets.all(12.0),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 16.0),
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const ExercisePickerWidget(),
+                    const SizedBox(height: 16.0),
+                    const Row(
+                      children: [
+                        Expanded(
+                          child: CupertinoTextField(
+                            placeholder: 'Reps',
+                            padding: EdgeInsets.all(12.0),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          child: CupertinoTextField(
+                            placeholder: 'Sets',
+                            padding: EdgeInsets.all(12.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    const CupertinoTextField(
+                      placeholder: 'Weight',
+                      padding: EdgeInsets.all(12.0),
+                    ),
+                    const SizedBox(height: 16.0),
+                    const Row(
+                      children: [
+                        Expanded(
+                          child: CupertinoTextField(
+                            placeholder: 'Distance',
+                            padding: EdgeInsets.all(12.0),
+                          ),
+                        ),
+                        SizedBox(width: 8.0),
+                        Expanded(
+                          child: CupertinoTextField(
+                            placeholder: 'Duration',
+                            padding: EdgeInsets.all(12.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: CupertinoColors.systemBackground
+                              .resolveFrom(context),
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                         color: CupertinoColors.systemBackground
                             .resolveFrom(context),
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                      color:
-                          CupertinoColors.systemBackground.resolveFrom(context),
-                      boxShadow: [
-                        BoxShadow(
-                          color: CupertinoTheme.of(context).primaryColor,
-                          blurRadius: 10.0,
-                        ),
-                      ],
-                    ),
-                    padding: const EdgeInsets.all(16.0),
-                    height: 150,
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        CircularProgressBar(
-                          progress: 180.0,
-                          goal: 500.0,
-                        ),
-                        Text(
-                          '567 Calories Burned',
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CupertinoButton(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 50.0),
+                        boxShadow: [
+                          BoxShadow(
                             color: CupertinoTheme.of(context).primaryColor,
-                            onPressed: () {},
-                            child: const Text(
-                              'Save Exercise',
-                              style: TextStyle(
-                                color: CupertinoColors.white,
-                              ),
-                            ),
-                          ),
-                          CupertinoButton(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 50.0),
-                            color: CupertinoTheme.of(context).primaryColor,
-                            onPressed: () {},
-                            child: const Text(
-                              'Save & New',
-                              style: TextStyle(
-                                color: CupertinoColors.white,
-                              ),
-                            ),
+                            blurRadius: 10.0,
                           ),
                         ],
                       ),
-                    ],
+                      padding: const EdgeInsets.all(16.0),
+                      height: 150,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CircularProgressBar(
+                            progress: 180.0,
+                            goal: 500.0,
+                          ),
+                          Text(
+                            '567 Calories Burned',
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CupertinoButton.filled(
+                          onPressed: () {},
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                              color: CupertinoColors.white,
+                            ),
+                          ),
+                        ),
+                        CupertinoButton.filled(
+                          onPressed: () {},
+                          child: const Text(
+                            'Save & New',
+                            style: TextStyle(
+                              color: CupertinoColors.white,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 150,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: CupertinoColors.systemGrey),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 200,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(color: CupertinoColors.systemGrey),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: const Text(
-                  'Weekly Progress Graph',
+                  child: const Text(
+                    'Weekly Progress Graph',
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
