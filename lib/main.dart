@@ -51,6 +51,9 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
     return CupertinoTabScaffold(
       controller: _tabController, // Attach the controller to the scaffold
       tabBar: CupertinoTabBar(
+        border: null,
+        backgroundColor: CupertinoColors.white,
+        height: 48.0,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
