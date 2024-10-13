@@ -1,11 +1,11 @@
 // main.dart
-
-// Base Packages
-import 'package:corpus_vitae/theme.dart'; // Theme Data for the App
-import 'package:corpus_vitae/ui/screens/fitness_tracking.dart'; // Import your Fitness Tracking screen
-// Screens
-import 'package:corpus_vitae/ui/screens/home.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+// Screens
+import 'package:corpus_vitae/theme.dart' as app_theme;
+import 'package:corpus_vitae/ui/screens/home.dart';
+import 'package:corpus_vitae/ui/screens/fitness_tracking.dart';
+import 'package:corpus_vitae/ui/screens/meal_tracking.dart';
 
 void main() {
   runApp(const CorpusVitaeApp());
@@ -17,7 +17,7 @@ class CorpusVitaeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: Theme.lightTheme,
+      theme: app_theme.Theme.lightTheme,
       home: const MainTabScaffold(), // Use the MainTabScaffold as the home
       debugShowCheckedModeBanner: false,
     );
@@ -51,15 +51,20 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
     return CupertinoTabScaffold(
       controller: _tabController, // Attach the controller to the scaffold
       tabBar: CupertinoTabBar(
+        border: null,
+        backgroundColor: CupertinoColors.white,
+        height: 48.0,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.heart),
+            icon: Icon(Icons.fitness_center),
             label: 'Fitness',
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.restaurant_menu), label: 'Nutrition')
         ],
       ),
       tabBuilder: (context, index) {
@@ -74,6 +79,12 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             return CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
                 child: FitnessTrackingScreen(tabController: _tabController),
+              );
+            });
+          case 2:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: MealTrackingScreen(tabController: _tabController),
               );
             });
           default:
