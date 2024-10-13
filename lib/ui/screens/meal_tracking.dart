@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // Widgets
 import 'package:corpus_vitae/ui/widgets/circular_progress.dart';
+import 'package:corpus_vitae/ui/screens/meal_history.dart';
 
 class MealTrackingScreen extends StatelessWidget {
   final CupertinoTabController tabController;
@@ -21,11 +22,11 @@ class MealTrackingScreen extends StatelessWidget {
         trailing: GestureDetector(
           onTap: () {
             // Open WorkoutHistoryScreen within the Fitness tab's navigation stack
-            // Navigator.of(context).push(
-            //   CupertinoPageRoute(
-            //     builder: (context) => WorkoutHistoryScreen(),
-            //   ),
-            // );
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => MealHistoryScreen(),
+              ),
+            );
           },
           child: const Text(
             'View History',
