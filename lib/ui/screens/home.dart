@@ -119,6 +119,42 @@ class HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     )),
+                const SizedBox(height: 16.0),
+                // Card with horizontal progress bars of Mood and Water Intake
+                Card(
+                  shadowColor: CupertinoTheme.of(context).primaryColor,
+                  elevation: 8.0,
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            CircularProgressBar(
+                              progress: 4.0,
+                              goal: 7.0,
+                            ),
+                            SizedBox(height: 8.0),
+                            Text('4 / 7 Hours'),
+                            Text('Sleep Hours'),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            CircularProgressBar(
+                              progress: 64.0,
+                              goal: 100.0,
+                            ),
+                            SizedBox(height: 8.0),
+                            Text('64 / 100 oz'),
+                            Text('Water Intake'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
