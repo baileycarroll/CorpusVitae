@@ -129,7 +129,7 @@ class HabitTrackingScreen extends StatelessWidget {
                           ),
                           const CupertinoTextField(
                             placeholder: 'Mood Notes',
-                            padding: const EdgeInsets.all(12.0),
+                            padding: EdgeInsets.all(12.0),
                             minLines: null,
                             maxLines: null,
                             expands: true,

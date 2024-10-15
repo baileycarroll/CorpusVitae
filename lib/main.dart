@@ -7,6 +7,7 @@ import 'package:corpus_vitae/ui/screens/home.dart';
 import 'package:corpus_vitae/ui/screens/fitness_tracking.dart';
 import 'package:corpus_vitae/ui/screens/meal_tracking.dart';
 import 'package:corpus_vitae/ui/screens/habit_tracking.dart';
+import 'package:corpus_vitae/ui/screens/profile.dart';
 
 void main() {
   runApp(const CorpusVitaeApp());
@@ -57,7 +58,7 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
         height: 48.0,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
+            icon: Icon(CupertinoIcons.house_fill),
             label: 'Home',
           ),
           BottomNavigationBarItem(
@@ -70,6 +71,10 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             icon: Icon(Icons.book_rounded),
             label: 'Habits',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.person_fill),
+            label: 'Profile',
+          )
         ],
       ),
       tabBuilder: (context, index) {
@@ -96,6 +101,12 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             return CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
                 child: HabitTrackingScreen(tabController: _tabController),
+              );
+            });
+          case 4:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: ProfileScreen(tabController: _tabController),
               );
             });
           default:
