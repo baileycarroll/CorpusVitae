@@ -6,6 +6,7 @@ import 'package:corpus_vitae/theme.dart' as app_theme;
 import 'package:corpus_vitae/ui/screens/home.dart';
 import 'package:corpus_vitae/ui/screens/fitness_tracking.dart';
 import 'package:corpus_vitae/ui/screens/meal_tracking.dart';
+import 'package:corpus_vitae/ui/screens/habit_tracking.dart';
 
 void main() {
   runApp(const CorpusVitaeApp());
@@ -64,7 +65,11 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             label: 'Fitness',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.restaurant_menu), label: 'Nutrition')
+              icon: Icon(Icons.restaurant_menu), label: 'Nutrition'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book_rounded),
+            label: 'Habits',
+          ),
         ],
       ),
       tabBuilder: (context, index) {
@@ -85,6 +90,12 @@ class MainTabScaffoldState extends State<MainTabScaffold> {
             return CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
                 child: MealTrackingScreen(tabController: _tabController),
+              );
+            });
+          case 3:
+            return CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: HabitTrackingScreen(tabController: _tabController),
               );
             });
           default:
