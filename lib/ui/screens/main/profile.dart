@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // Widgets
-import 'package:corpus_vitae/ui/screens/settings.dart';
+import 'package:corpus_vitae/ui/screens/main/settings.dart';
 // Date Formatting
 import 'package:intl/intl.dart';
 

@@ -1,7 +1,7 @@
 // Base Packages
 import 'package:flutter/cupertino.dart';
 // Widgets
-import 'package:corpus_vitae/ui/screens/workout_history.dart';
+import 'package:corpus_vitae/ui/screens/history/fitness.dart';
 import 'package:corpus_vitae/ui/widgets/circular_progress.dart';
 import 'package:corpus_vitae/ui/widgets/exercise_types_dropdown.dart';
 // Date Formatting
@@ -141,6 +141,7 @@ class FitnessTrackingScreen extends StatelessWidget {
                           CircularProgressBar(
                             progress: 180.0,
                             goal: 500.0,
+                            semanticsLabel: 'Calories Burned',
                           ),
                           Text(
                             '567 Calories Burned',

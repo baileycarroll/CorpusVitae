@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // Screens
 import 'package:corpus_vitae/theme.dart' as app_theme;
-import 'package:corpus_vitae/ui/screens/home.dart';
-import 'package:corpus_vitae/ui/screens/fitness_tracking.dart';
-import 'package:corpus_vitae/ui/screens/meal_tracking.dart';
-import 'package:corpus_vitae/ui/screens/habit_tracking.dart';
-import 'package:corpus_vitae/ui/screens/profile.dart';
+import 'package:corpus_vitae/ui/screens/main/home.dart';
+import 'package:corpus_vitae/ui/screens/main/fitness.dart';
+import 'package:corpus_vitae/ui/screens/main/meal.dart';
+import 'package:corpus_vitae/ui/screens/main/habit.dart';
+import 'package:corpus_vitae/ui/screens/main/profile.dart';
 
 void main() {
   runApp(const CorpusVitaeApp());

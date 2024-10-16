@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class CircularProgressBar extends StatelessWidget {
   final double progress; // Example value for calories burned
   final double goal;
+  final IconData? icon;
+  final String? semanticsLabel;
 
   const CircularProgressBar({
     super.key,
     required this.progress,
     required this.goal,
+    this.icon,
+    required this.semanticsLabel,
   }); // Example goal for calories to
   // burn
 
@@ -32,10 +36,11 @@ class CircularProgressBar extends StatelessWidget {
                   valueColor: AlwaysStoppedAnimation(
                       CupertinoTheme.of(context).primaryColor),
                   strokeWidth: 10.0,
+                  semanticsLabel: semanticsLabel,
                 ),
                 Center(
                   child: Icon(
-                    Icons.whatshot,
+                    icon ?? Icons.whatshot,
                     color: CupertinoTheme.of(context).primaryColor,
                     size: 50,
                   ),

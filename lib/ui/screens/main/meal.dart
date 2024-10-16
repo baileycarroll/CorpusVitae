@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // Widgets
 import 'package:corpus_vitae/ui/widgets/circular_progress.dart';
-import 'package:corpus_vitae/ui/screens/meal_history.dart';
+import 'package:corpus_vitae/ui/screens/history/meal.dart';
 
 class MealTrackingScreen extends StatelessWidget {
   final CupertinoTabController tabController;
@@ -185,6 +185,8 @@ class MealTrackingScreen extends StatelessWidget {
                         CircularProgressBar(
                           progress: 1567.0,
                           goal: 2500.0,
+                          semanticsLabel: 'Calories Consumed',
+                          icon: Icons.fastfood,
                         ),
                         Text(
                           '1567 Calories Consumed',
